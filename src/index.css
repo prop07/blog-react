@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme {
   --color-primary: #f8f8f7;
@@ -8,17 +9,19 @@
   --color-default-hover:#d9d9d8;
   --color-text-muted:#ececec;
   --color-btn-muted:#ececec;
-  --color-btn-active:#404040;
-  --color-btn-hover:#ececec
+  --color-btn:#000;
+  --color-btn-text:#fff;
+  --color-btn-hover:#ececec;
 }
 
 [data-theme="dark"] {
   --color-secondary: #191919;
   --color-primary: #202020;
-  --color-text:#ffffff;
+  --color-text:#fff;
   --color-default-border:#2c2c2c;
   --color-default-hover:#2c2c2c;
   --color-btn-muted:#404040;
-  --color-btn-active:#ececec;
+  --color-btn:#fff;
+  --color-btn-text:#000;
   --color-btn-hover:#404040;
 }

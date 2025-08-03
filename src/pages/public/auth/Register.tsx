@@ -4,9 +4,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import InputField from '@/components/ui/Input/InputField'
 import PageHeader from '@/components/ui/PageHeader'
 import Submit from '@/components/ui/button/Submit'
+import { Link } from 'react-router'
+import useAuth from '@/hooks/useAuth'
 
 const registerSchema = z.object({
-  name: z.string().min(2, 'Name is required'),
+  name: z.string().min(1, 'Name is required'),
   email: z.string().email('Invalid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
 })
@@ -14,6 +16,8 @@ const registerSchema = z.object({
 type RegisterFormInputs = z.infer<typeof registerSchema>
 
 function Register() {
+  const { registerUser } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -23,8 +27,8 @@ function Register() {
   })
 
   const onSubmit = (data: RegisterFormInputs) => {
-    console.log('Register data:', data)
-  }
+    registerUser(data.username, data.email, data.password);
+  };
 
   return (
     <div className="relative">
@@ -51,6 +55,7 @@ function Register() {
           />
           <Submit placeholder="Register" />
         </form>
+        <Link to='/auth/login'><p className='text-sm underline text-end mt-2 tracking-wider'>login</p></Link>
       </div>
     </div>
   )

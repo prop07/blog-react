@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import InputField from '@/components/ui/Input/InputField'
 import PageHeader from '@/components/ui/PageHeader'
 import Submit from '@/components/ui/button/Submit'
+import { Link } from 'react-router'
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -44,6 +45,7 @@ function Login() {
       />
 <Submit placeholder="Login" />
     </form>
+    <Link to='/auth/register'><p className='text-sm underline text-end mt-2 tracking-wider'>register</p></Link>
   </div>
 </div>
   )

@@ -11,6 +11,28 @@ const users = [];
 const blogs = [];
 const JWT_SECRET = "secret123";
 
+// Log every request
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  if (req.method !== "GET") {
+    console.log("Body:", req.body);
+  }
+  next();
+});
+
+// Debug route
+app.get("/", (req, res) => {
+  console.log("===== DEBUG =====");
+  console.log("Users:", users);
+  console.log("Blogs:", blogs);
+  console.log("=================");
+  res.send({
+    message: "Debug info",
+    users,
+    blogs,
+  });
+});
+
 // Register
 app.post("/api/user/register", async (req, res) => {
   const { username, email, password } = req.body;
@@ -64,4 +86,8 @@ app.delete("/api/blog/:id", (req, res) => {
   res.send({ message: "Deleted" });
 });
 
-app.listen(5000, () => console.log("Server running on port 5000"));
+app.listen(5000, () => {
+  console.log("====================================");
+  console.log("🚀 Server running at: http://localhost:5000");
+  console.log("====================================");
+});

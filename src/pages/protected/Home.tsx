@@ -1,6 +1,6 @@
 import useLoading from "@/hooks/useLoading";
-import { successToast, errorToast } from "@/components/ui/toast/Toast";
 import { Link } from "react-router";
+import toast from "react-hot-toast";
 
 const Home = () => {
   const { isLoading, setLoading } = useLoading();
@@ -9,12 +9,12 @@ const Home = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      successToast("Loading complete!");
+      toast.success("Loading complete!");
     }, 2000);
   };
 
   const triggerError = () => {
-    errorToast("Something went wrong!");
+    toast.error("Something went wrong!");
   };
 
   return (

@@ -2,11 +2,13 @@
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import useLoading from "./useLoading";
-import { errorToast, successToast } from "@/components/ui/toast/Toast";
+import { useNavigate } from "react-router";
+
 
 const API_BASE = "http://localhost:5000/api/user";
 
 const useAuth = () => {
+    const navigate = useNavigate();
     const { setLoading } = useLoading();
     const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!token);
@@ -21,15 +23,18 @@ const useAuth = () => {
                 body: JSON.stringify({ email, password }),
             });
 
-            if (!res.ok) throw new Error("Login failed");
-
             const data = await res.json();
+            if (!res.ok) {
+                throw new Error(data.error || "Login failed");
+            }
+
             localStorage.setItem("token", data.token);
             setToken(data.token);
             setIsAuthenticated(true);
-            successToast("Login successful");
+            toast.success("Login successful");
+            navigate("/")
         } catch (error) {
-            errorToast((error as Error).message || "Login failed");
+            toast.error((error as Error).message || "Login failed");
         } finally {
             setLoading(false);
         }
@@ -49,9 +54,10 @@ const useAuth = () => {
                 throw new Error(error.message || "Registration failed");
             }
 
-            successToast("Registration successful");
+            toast.success("Registration successful");
+            navigate("/auth/login")
         } catch (error) {
-            errorToast((error as Error).message || "Registration failed");
+            toast.error((error as Error).message || "Registration failed");
         } finally {
             setLoading(false);
         }

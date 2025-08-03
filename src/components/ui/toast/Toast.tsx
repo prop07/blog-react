@@ -1,4 +1,4 @@
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 const Toast = () => {
   const style = {
@@ -16,12 +16,3 @@ const Toast = () => {
 };
 
 export default Toast;
-
-// Utility functions for triggering toasts
-export const successToast = (message: string) => {
-  toast.success(message);
-};
-
-export const errorToast = (message: string) => {
-  toast.error(message);
-};

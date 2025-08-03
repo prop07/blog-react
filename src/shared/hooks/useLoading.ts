@@ -1,4 +1,4 @@
-import LoadingContext from "@/context/LoadingProvider";
+import LoadingContext from "@/shared/context/LoadingProvider";
 import { useContext } from "react";
 
 

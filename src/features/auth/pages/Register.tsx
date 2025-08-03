@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import InputField from '@/components/ui/Input/InputField'
-import PageHeader from '@/components/ui/PageHeader'
-import Submit from '@/components/ui/button/Submit'
+import InputField from '@/shared/components/ui/Input/InputField'
+import PageHeader from '@/shared/components/ui/PageHeader'
+import Submit from '@/shared/components/ui/button/Submit'
 import { Link } from 'react-router'
-import useAuth from '@/hooks/useAuth'
+import useAuth from '../hooks/useAuth'
 
 const registerSchema = z.object({
   name: z.string().min(1, 'Name is required'),

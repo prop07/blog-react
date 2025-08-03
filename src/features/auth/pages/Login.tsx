@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import InputField from '@/components/ui/Input/InputField'
-import PageHeader from '@/components/ui/PageHeader'
-import Submit from '@/components/ui/button/Submit'
+import InputField from '@/shared/components/ui/Input/InputField'
+import PageHeader from '@/shared/components/ui/PageHeader'
+import Submit from '@/shared/components/ui/button/Submit'
 import { Link } from 'react-router'
-import useAuth from '@/hooks/useAuth'
+import useAuth from '@/features/auth/hooks/useAuth'
 
 const loginSchema = z.object({
   email: z.string().nonempty("Email is required").email("Invalid email address"),

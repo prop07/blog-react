@@ -1,6 +1,6 @@
 import { Toaster } from "react-hot-toast";
 import Router from "./router";
-import { LoadingProvider } from "@/context/LoadingProvider";
+import { LoadingProvider } from "@/shared/context/LoadingProvider";
 
 function App() {
   return (

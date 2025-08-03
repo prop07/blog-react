@@ -27,7 +27,7 @@ function Register() {
   })
 
   const onSubmit = (data: RegisterFormInputs) => {
-    registerUser(data.username, data.email, data.password);
+    registerUser(data.name, data.email, data.password);
   };
 
   return (

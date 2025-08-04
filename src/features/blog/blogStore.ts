@@ -4,8 +4,7 @@ import { create } from "zustand";
 interface Blog {
   id: string;
   title: string;
-  content: string;
-  // Add other fields
+  description: string;
 }
 
 type Status = "idle" | "pending";

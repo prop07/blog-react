@@ -30,7 +30,7 @@ const BlogCard = ({ id, title, description,onEdit, onDelete }:BlogCard) => {
 export default BlogCard
 
 
-const LoadingAnimations = () => {
+export const LoadingAnimations = () => {
   return (
     <div className=" space-y-4 mt-2">
       <div className="p-4 space-y-2 rounded-md border  border-default-border animate-pulse">
@@ -50,3 +50,4 @@ const LoadingAnimations = () => {
     </div>
   );
 };
+

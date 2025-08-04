@@ -4,17 +4,21 @@ import BlogForm from './BlogForm'
 import { useBlog } from '../hooks/useBlog'
 import { useEffect, useState } from 'react'
 
+type Blog = {
+  id: string
+  title: string
+  description: string
+}
+
 const BlogList = () => {
   const { blogs, fetchBlogs, createBlog, updateBlog, deleteBlog } = useBlog()
-  const [editingBlog, setEditingBlog] = useState(null)
+  const [editingBlog, setEditingBlog] = useState<Blog | null>(null)
 
   useEffect(() => {
     fetchBlogs()
   }, [])
 
-  console.log("editing blog:", editingBlog)
-
-  const handleSubmit = async (data) => {
+  const handleSubmit = async (data: { title: string; description: string }) => {
     if (editingBlog) {
       await updateBlog(editingBlog.id, data)
       setEditingBlog(null)
@@ -28,11 +32,10 @@ const BlogList = () => {
       <div className="flex justify-between items-center">
         <PageHeader text="Trending Blog" />
         <BlogForm
-          initialData={editingBlog}
+          initialData={editingBlog ?? undefined}
           onSubmit={handleSubmit}
           onClose={() => setEditingBlog(null)}
         />
-
       </div>
 
       {blogs.map((blog) => (
@@ -40,7 +43,7 @@ const BlogList = () => {
           key={blog.id}
           id={blog.id}
           title={blog.title}
-          description={blog.content}
+          description={blog.description}
           onEdit={() => setEditingBlog(blog)}
           onDelete={() => deleteBlog(blog.id)}
         />

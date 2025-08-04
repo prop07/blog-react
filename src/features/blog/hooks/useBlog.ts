@@ -4,6 +4,12 @@ import toast from "react-hot-toast";
 
 const API_URL = "http://localhost:5000/api/blog";
 
+type Blog = {
+  id: string;
+  title: string;
+  description: string;
+};
+
 export const useBlog = () => {
   const { blogs, status, setBlogs, setBlogStatus } = useBlogStore();
   const { fetchData } = useFetch();
@@ -11,7 +17,7 @@ export const useBlog = () => {
   const fetchBlogs = async () => {
     setBlogStatus("pending");
     try {
-      const data = await fetchData(API_URL);
+      const data: Blog[] = await fetchData(API_URL);
       setBlogs(data);
       console.log(JSON.stringify(data,null,2))
     } catch (error) {
@@ -22,7 +28,7 @@ export const useBlog = () => {
     }
   };
 
-  const createBlog = async (data: any) => {
+  const createBlog = async (data: { title: string; description: string }) => {
     try {
       await fetchData(API_URL, {
         method: "POST",
@@ -35,7 +41,7 @@ export const useBlog = () => {
     }
   };
 
-  const updateBlog = async (id: string, data: any) => {
+  const updateBlog = async (id: string, data: { title: string; description: string }) => {
     try {
       await fetchData(`${API_URL}/${id}`, {
         method: "PUT",

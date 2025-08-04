@@ -5,9 +5,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 type Props = {
   onEdit:()=>void,
   onDelete:()=>void
-
 }
-
 
 const BlogActions = ({onDelete, onEdit}:Props) => {
   const [toggleAction, setToggleAction] = useState(false);

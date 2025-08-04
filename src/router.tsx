@@ -3,8 +3,8 @@ import Layout from "./layouts/Layout";
 import Home from "./features/dashboard/Home";
 import Login from "./features/auth/pages/Login";
 import Register from "./features/auth/pages/Register";
-import PrivateRoute from "./PrivateRoute";
 import AuthLayout from "./layouts/AuthLayout";
+import ProtectedLayout from "./layouts/ProtectedLayout";
 
 
 const routes = createBrowserRouter([
@@ -28,7 +28,7 @@ const routes = createBrowserRouter([
         ],
       },
       {
-        element: <PrivateRoute />, // wrap protected routes
+        element: <ProtectedLayout />, // wrap protected routes
         children: [
           {
             index: true,

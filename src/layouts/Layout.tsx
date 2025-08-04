@@ -4,11 +4,11 @@ import { Outlet } from "react-router";
 
 const Layout = () => {
   return (
-    <div className=" bg-secondary text-text min-h-[100vh] flex flex-col overflow-hidden">
-    <TopLoadingBar />
+    <div className=" bg-secondary text-text min-h-[100vh] flex flex-col overflow-hidden ">
+      <TopLoadingBar />
       <NavBar />
       <div className="mt-10 p-2">
-      <Outlet />
+        <Outlet />
       </div>
     </div>
   );

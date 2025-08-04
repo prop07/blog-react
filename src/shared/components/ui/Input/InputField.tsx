@@ -2,10 +2,10 @@ type InputFieldProps = {
   placeholder: string;
   type?: string;
   error?: string;
-} & React.InputHTMLAttributes<HTMLInputElement>;    
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
 
-const InputField = ({ placeholder, type = "text", error, ...rest }:InputFieldProps) => {
+const InputField = ({ placeholder, type = "text", error, ...rest }: InputFieldProps) => {
   return (
     <div className="mt-4">
       <input

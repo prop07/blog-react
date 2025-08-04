@@ -5,10 +5,10 @@ import LogoutButton from "@/features/auth/components/LogoutButton";
 const NavBar = () => {
 
     return (
-        <div className=" fixed  w-full bg-secondary ">
+        <div className=" fixed  w-full bg-secondary z-50 ">
             <div className="flex  justify-between  p-2 h-[52px]">
                 <div className="px-2 font-semibold tracking-widest">
-                    <Link to={"/"}>Blog</Link>
+                    <Link to={"/"}>Blog Logo</Link>
                 </div>
                 <div className="flex gap-1">
                     <LogoutButton />

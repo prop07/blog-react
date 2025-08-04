@@ -7,11 +7,42 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const users = [];
+const users = [
+  {
+    name: "admin",
+    email: "admin@gmail.com",
+    password: "adminadmin",
+  },
+];
+const getRandomText = () => {
+  const words =
+    `Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum`.split(
+      " "
+    );
+  const wordCount = Math.floor(Math.random() * 101) + 100; // 100–200
+  return Array.from(
+    { length: wordCount },
+    () => words[Math.floor(Math.random() * words.length)]
+  ).join(" ");
+};
+
+const sampleTitles = [
+  "Why My Cat Might Be Smarter Than Me",
+  "Top 10 Games That Ruined My Sleep Schedule",
+  "Life Hacks That Are Technically Legal",
+  "I Tried Talking to Plants—Here's What Happened",
+  "The Great Debate: Pineapple on Pizza",
+  "How I Survived a Week Without Coffee",
+  "Nature is Healing (Until You Get Bitten)",
+  "Football Skills I Pretend to Have",
+  "Things I Googled at 2AM and Regret",
+  "My Dog’s Secret Life When I’m Not Home",
+];
+
 const blogs = Array.from({ length: 10 }, (_, i) => ({
   id: String(i + 1),
-  title: `Blog Title ${i + 1}`,
-  description: `This is the description for blog ${i + 1}.`
+  title: sampleTitles[i],
+  description: getRandomText(),
 }));
 const JWT_SECRET = "secret123";
 
@@ -48,7 +79,7 @@ app.post("/api/user/register", async (req, res) => {
 // Login
 app.post("/api/user/login", async (req, res) => {
   const { email, password } = req.body;
-  const user = users.find(u => u.email === email);
+  const user = users.find((u) => u.email === email);
   if (!user || !(await bcrypt.compare(password, user.password))) {
     return res.status(401).send({ error: "Invalid credentials" });
   }
@@ -70,13 +101,13 @@ app.get("/api/blog", (req, res) => {
 
 // Read single blog
 app.get("/api/blog/:id", (req, res) => {
-  const blog = blogs.find(b => b.id === req.params.id);
+  const blog = blogs.find((b) => b.id === req.params.id);
   res.send(blog || {});
 });
 
 // Update blog
 app.put("/api/blog/:id", (req, res) => {
-  const index = blogs.findIndex(b => b.id === req.params.id);
+  const index = blogs.findIndex((b) => b.id === req.params.id);
   if (index === -1) return res.status(404).send({ error: "Not found" });
   blogs[index] = { ...blogs[index], ...req.body };
   res.send(blogs[index]);
@@ -84,7 +115,7 @@ app.put("/api/blog/:id", (req, res) => {
 
 // Delete blog
 app.delete("/api/blog/:id", (req, res) => {
-  const index = blogs.findIndex(b => b.id === req.params.id);
+  const index = blogs.findIndex((b) => b.id === req.params.id);
   if (index === -1) return res.status(404).send({ error: "Not found" });
   blogs.splice(index, 1);
   res.send({ message: "Deleted" });

@@ -4,14 +4,19 @@ export const useFetch = () => {
   const { token } = useAuthStore();
 
   const getAuthHeader = (url: string) => {
-    const headers: Record<string, string> = { "Content-Type": "application/json" };
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+    };
     if (token && url.includes("blog")) {
       headers["Authorization"] = `Bearer ${token}`;
     }
     return headers;
   };
 
-  const fetchData = async <T>(url: string, options?: RequestInit): Promise<T> => {
+  const fetchData = async <T>(
+    url: string,
+    options?: RequestInit
+  ): Promise<T> => {
     const res = await fetch(url, {
       headers: getAuthHeader(url),
       ...options,

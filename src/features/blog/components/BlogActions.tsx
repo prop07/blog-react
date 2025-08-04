@@ -3,11 +3,11 @@ import { useState, useEffect, useRef } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
 type Props = {
-  onEdit:()=>void,
-  onDelete:()=>void
+  onEdit: () => void,
+  onDelete: () => void
 }
 
-const BlogActions = ({onDelete, onEdit}:Props) => {
+const BlogActions = ({ onDelete, onEdit }: Props) => {
   const [toggleAction, setToggleAction] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -45,7 +45,7 @@ const BlogActions = ({onDelete, onEdit}:Props) => {
       {toggleAction && (
         <div className="absolute top-[73%] -left-15 mt-2 rounded-md inline-block p-1 text-sm tracking-wider bg-primary shadow-md shadow-default border border-default-border">
           <p
-          onClick={onEdit}
+            onClick={onEdit}
             className=" px-2 py-1 text-center whitespace-nowrap   cursor-pointer rounded-md hover:bg-default-hover ease-in-out duration-200"
           >
             Update

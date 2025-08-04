@@ -21,7 +21,6 @@ export const useBlog = () => {
     try {
       const data: Blog[] = await fetchData(API_URL);
       setBlogs(data);
-      console.log(JSON.stringify(data, null, 2));
     } catch (error) {
       console.error("Failed to fetch blogs:", error);
     } finally {

@@ -4,6 +4,7 @@ import Home from "./features/dashboard/Home";
 import Login from "./features/auth/pages/Login";
 import Register from "./features/auth/pages/Register";
 import PrivateRoute from "./PrivateRoute";
+import AuthLayout from "./layouts/AuthLayout";
 
 
 const routes = createBrowserRouter([
@@ -13,12 +14,18 @@ const routes = createBrowserRouter([
     errorElement: <div>Not Found</div>,
     children: [
       {
-        path: "/auth/login",
-        element: <Login />,
-      },
-      {
-        path: "/auth/register",
-        element: <Register />,
+        path: "/auth",
+        element: <AuthLayout />, // wrap auth routes
+        children: [
+          {
+            path: "login",
+            element: <Login />,
+          },
+          {
+            path: "register",
+            element: <Register />,
+          },
+        ],
       },
       {
         element: <PrivateRoute />, // wrap protected routes
@@ -27,19 +34,10 @@ const routes = createBrowserRouter([
             index: true,
             element: <Home />,
           },
-          // {
-          //   path: "/create",
-          //   element: <Create />,
-          // },
-          // {
-          //   path: "/edit/:id",
-          //   element: <Edit />,
-          // },
         ],
       },
     ],
   },
 ]);
-
 const Router = () => <RouterProvider router={routes} />;
 export default Router;

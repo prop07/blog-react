@@ -1,6 +1,8 @@
 import { Link } from "react-router";
+import { FaGithub } from "react-icons/fa";
 import Theme from "../Theme";
 import LogoutButton from "@/features/auth/components/LogoutButton";
+import Button from "./ui/button/Button";
 
 const NavBar = () => {
 
@@ -13,6 +15,9 @@ const NavBar = () => {
                 <div className="flex gap-1">
                     <LogoutButton />
                     <Theme />
+                    <Link to="https://github.com/prop07" target="_blank">
+                        <Button icon={<FaGithub size={18} />} />
+                    </Link>
                 </div>
             </div>
         </div>

@@ -14,7 +14,7 @@ const Button = ({ onClick, icon, placeholder, className }: ButtonProps) => {
             onClick={onClick}
         >
             {placeholder && (
-                <span className="font-semibold tracking-wider text-sm sm:text-base">
+                <span className=" tracking-wider text-sm ">
                     {placeholder}
                 </span>
             )}

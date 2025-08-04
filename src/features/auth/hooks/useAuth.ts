@@ -8,10 +8,7 @@ const API_BASE = "http://localhost:5000/api/user";
 const useAuth = () => {
   const navigate = useNavigate();
   const { setLoading } = useLoading();
-  const token = useAuthStore((state) => state.token);
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const setToken = useAuthStore((state) => state.setToken);
-  const logoutStore = useAuthStore((state) => state.logout);
+const {token, isAuthenticated, setToken, logout} = useAuthStore()
 
   const loginUser = async (email: string, password: string) => {
     try {
@@ -55,8 +52,8 @@ const useAuth = () => {
     }
   };
 
-  const logout = () => {
-    logoutStore();
+  const logoutUser = () => {
+    logout();
     toast.success("Logged out");
     navigate("/auth/login");
   };
@@ -66,7 +63,7 @@ const useAuth = () => {
     isAuthenticated,
     loginUser,
     registerUser,
-    logout,
+    logoutUser,
   };
 };
 

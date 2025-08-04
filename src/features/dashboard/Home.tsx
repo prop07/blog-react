@@ -1,6 +1,8 @@
 import useLoading from "@/shared/hooks/useLoading";
 import { Link } from "react-router";
 import toast from "react-hot-toast";
+import BlogCard from "../blog/components/BlogCard";
+import BlogList from "../blog/components/BlogList";
 
 const Home = () => {
   const { isLoading, setLoading } = useLoading();
@@ -32,6 +34,8 @@ const Home = () => {
       <Link to="/auth/register" className="text-blue-500 hover:underline mt-2 block">
         Go to Register
       </Link>
+      <BlogList/>
+    
     </div>
   );
 };

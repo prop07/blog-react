@@ -4,12 +4,12 @@ import Button from "@/shared/components/ui/button/Button";
 import useAuth from "../hooks/useAuth";
 
 const LogoutButton = () => {
-    const { isAuthenticated, logout } = useAuth();
+    const { isAuthenticated, logoutUser } = useAuth();
     if (!isAuthenticated) {
         console.log("user not found")
         return null
     }
-     return <Button onClick={logout} icon={<MdLogout size={18} />} />
+     return <Button onClick={logoutUser} icon={<MdLogout size={18} />} />
 }
 
 export default LogoutButton

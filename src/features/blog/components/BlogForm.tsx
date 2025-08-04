@@ -71,7 +71,7 @@ const BlogForm = ({
       />
 
       <Modal isOpen={showModal} onClose={closeModal}>
-        <form className="grid space-y-2" onSubmit={handleSubmit(handleFormSubmit)}>
+        <form className="grid space-y-3" onSubmit={handleSubmit(handleFormSubmit)}>
           <div className="flex justify-between items-center">
             <h1 className="font-semibold tracking-wider">
               {initialData ? 'Edit Blog' : 'Blog Details'}

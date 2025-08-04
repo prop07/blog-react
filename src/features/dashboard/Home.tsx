@@ -5,20 +5,20 @@ import BlogList from "../blog/components/BlogList";
 import { useBlog } from "../blog/hooks/useBlog";
 
 const Home = () => {
-  const { isLoading, setLoading } = useLoading();
-  const { blogs, status } = useBlog();
+  // const { isLoading, setLoading } = useLoading();
+  // const { blogs, status } = useBlog();
 
-  const startProcess = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      toast.success("Loading complete!");
-    }, 2000);
-  };
+  // const startProcess = () => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //     toast.success("Loading complete!");
+  //   }, 2000);
+  // };
 
-  const triggerError = () => {
-    toast.error("Something went wrong!");
-  };
+  // const triggerError = () => {
+  //   toast.error("Something went wrong!");
+  // };
 
   return (
     <div className=" p-2">

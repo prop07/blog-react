@@ -1,11 +1,15 @@
 import express from "express";
-import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import cors from "cors";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// 1-second delay middleware
+app.use((req, res, next) => {
+  setTimeout(() => next(), 1000);
+});
 
 const users = [
   {
@@ -14,12 +18,13 @@ const users = [
     password: "adminadmin",
   },
 ];
+
 const getRandomText = () => {
   const words =
     `Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum`.split(
       " "
     );
-  const wordCount = Math.floor(Math.random() * 101) + 100; // 100–200
+  const wordCount = Math.floor(Math.random() * 101) + 100;
   return Array.from(
     { length: wordCount },
     () => words[Math.floor(Math.random() * words.length)]
@@ -44,6 +49,7 @@ const blogs = Array.from({ length: 10 }, (_, i) => ({
   title: sampleTitles[i],
   description: getRandomText(),
 }));
+
 const JWT_SECRET = "secret123";
 
 // Log every request
@@ -57,10 +63,6 @@ app.use((req, res, next) => {
 
 // Debug route
 app.get("/", (req, res) => {
-  console.log("===== DEBUG =====");
-  console.log("Users:", users);
-  console.log("Blogs:", blogs);
-  console.log("=================");
   res.send({
     message: "Debug info",
     users,
@@ -69,18 +71,17 @@ app.get("/", (req, res) => {
 });
 
 // Register
-app.post("/api/user/register", async (req, res) => {
+app.post("/api/user/register", (req, res) => {
   const { username, email, password } = req.body;
-  const hashed = await bcrypt.hash(password, 10);
-  users.push({ username, email, password: hashed });
+  users.push({ username, email, password });
   res.send({ message: "User registered" });
 });
 
 // Login
-app.post("/api/user/login", async (req, res) => {
+app.post("/api/user/login", (req, res) => {
   const { email, password } = req.body;
   const user = users.find((u) => u.email === email);
-  if (!user || !(await bcrypt.compare(password, user.password))) {
+  if (!user || user.password !== password) {
     return res.status(401).send({ error: "Invalid credentials" });
   }
   const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: "1d" });
@@ -99,16 +100,10 @@ app.get("/api/blog", (req, res) => {
   res.send(blogs);
 });
 
-// Read single blog
-app.get("/api/blog/:id", (req, res) => {
-  const blog = blogs.find((b) => b.id === req.params.id);
-  res.send(blog || {});
-});
-
 // Update blog
 app.put("/api/blog/:id", (req, res) => {
   const index = blogs.findIndex((b) => b.id === req.params.id);
-  if (index === -1) return res.status(404).send({ error: "Not found" });
+  if (index === -1) return res.status(404).send({ error: "Blog Not Found!" });
   blogs[index] = { ...blogs[index], ...req.body };
   res.send(blogs[index]);
 });
@@ -116,13 +111,14 @@ app.put("/api/blog/:id", (req, res) => {
 // Delete blog
 app.delete("/api/blog/:id", (req, res) => {
   const index = blogs.findIndex((b) => b.id === req.params.id);
-  if (index === -1) return res.status(404).send({ error: "Not found" });
+  if (index === -1) return res.status(404).send({ error: "Blog Not Found!" });
   blogs.splice(index, 1);
   res.send({ message: "Deleted" });
 });
 
 app.listen(5000, () => {
   console.log("====================================");
-  console.log("🚀 Server running at: http://localhost:5000");
+  console.log("🚀 Server running. Debug at: http://localhost:5000");
+  console.log("⏳ 1 second delay by default for every request");
   console.log("====================================");
 });

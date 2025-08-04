@@ -32,14 +32,12 @@ export const useBlog = () => {
   const createBlog = async (data: { title: string; description: string }) => {
     try {
       setLoading(true);
-      await fetchData(API_URL, {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-      toast.success("Blog Added Sucessfully");
+      await fetchData(API_URL, { method: "POST", body: JSON.stringify(data) });
+      toast.success("Blog Added Successfully");
       await fetchBlogs();
     } catch (error) {
-      console.error("Failed to create blog:", error);
+      toast.error((error as Error).message || "Unable to Add Blog");
+      throw error; // rethrow
     } finally {
       setLoading(false);
     }
@@ -55,10 +53,11 @@ export const useBlog = () => {
         method: "PUT",
         body: JSON.stringify(data),
       });
-      toast.success("Blog Updated Sucessfully");
+      toast.success("Blog Updated Successfully");
       await fetchBlogs();
     } catch (error) {
-      console.error(`Failed to update blog ${id}:`, error);
+      toast.error((error as Error).message || "Unable to Update Blog");
+      throw error; // rethrow
     } finally {
       setLoading(false);
     }
@@ -73,7 +72,7 @@ export const useBlog = () => {
       toast.success("Blog Deleted Sucessfully");
       await fetchBlogs();
     } catch (error) {
-      console.error(`Failed to delete blog ${id}:`, error);
+      toast.error((error as Error).message || "Unable to Delete Blog");
     } finally {
       setLoading(false);
     }

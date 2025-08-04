@@ -21,7 +21,7 @@ const BlogList = () => {
   const handleSubmit = async (data: { title: string; description: string }) => {
     if (editingBlog) {
       await updateBlog(editingBlog.id, data)
-      setTimeout(() => { setEditingBlog(null) }, 500)
+      setTimeout(() => { setEditingBlog(null) }, 100)
     } else {
       await createBlog(data)
     }
@@ -38,11 +38,8 @@ const BlogList = () => {
         />
       </div>
       <div className='grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4'>
-        {[...Array(6)].map((_, i) => (
-          <LoadingAnimations key={i} />
-        ))}
         {status === "pending" ? (
-          <span>loading</span>
+          [...Array(12)].map((_, i) => <LoadingAnimations key={i} />)
         ) : (
           blogs.map((blog) => (
             <BlogCard

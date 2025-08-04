@@ -14,7 +14,7 @@ const InputField = ({ placeholder, type = "text", error, ...rest }:InputFieldPro
         className={`p-2 border rounded focus:ring-1 focus:outline-none w-full border-default-border `}
         {...rest}
       />
-      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+      {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
     </div>
   )
 }

@@ -1,17 +1,27 @@
+import BlogActions from "./BlogActions"
 
-const BlogCard = () => {
+type BlogCard = {
+  id:string,
+  title:string,
+  description:string,
+  onEdit:()=>void,
+  onDelete:()=>void
+}
+
+const BlogCard = ({ id, title, description,onEdit, onDelete }:BlogCard) => {
   return (
      <div
+     key={id}
       className="p-4 space-y-2 rounded-md border border-default-border bg-primary cursor-pointer"
     >
       <div className="flex justify-between items-start">
-        <h1 className="font-semibold break-words">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque, perferendis.</h1>
-        {/* {path === "/space" && (
-          <FieldActions spaceId={spaceId} details={details} />
-        )} */}
+        <h1 className="font-semibold break-words">{title}</h1>
+       
+          <BlogActions onDelete={onDelete} onEdit={onEdit} />
+        
       </div>
       <div className="max-h-96 overflow-y-hidden">
-        <p className=" text-sm" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum doloremque debitis eligendi non nulla. Facilis ullam temporibus ex voluptatibus architecto impedit, corporis officiis repellendus laboriosam, dolorem asperiores accusantium aut? Voluptatibus, in. Voluptas molestiae vel dignissimos voluptate fuga, quasi assumenda natus?</p>
+        <p className=" text-sm" >{description}</p>
       </div>
     </div>
   )

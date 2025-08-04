@@ -9,6 +9,7 @@ type ButtonProps = {
 const Button = ({ onClick, icon, placeholder, className }:ButtonProps) => {
     return (
         <button
+        type="button"
             className={`${className} flex items-center gap-1 cursor-pointer p-2 rounded-md   hover:bg-default-hover`}
             onClick={onClick}
         >

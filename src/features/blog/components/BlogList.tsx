@@ -1,24 +1,51 @@
 import PageHeader from '@/shared/components/ui/PageHeader'
 import BlogCard from './BlogCard'
-import Button from '@/shared/components/ui/button/Button'
-import { MdAdd } from 'react-icons/md'
+import BlogForm from './BlogForm'
+import { useBlog } from '../hooks/useBlog'
+import { useEffect, useState } from 'react'
 
 const BlogList = () => {
-  return (
-    <div className=' space-y-2'> 
-    <div className='flex justify-between items-center'>
+  const { blogs, fetchBlogs, createBlog, updateBlog, deleteBlog } = useBlog()
+  const [editingBlog, setEditingBlog] = useState(null)
 
-    <PageHeader text='Tranding Blog'/>
-       <Button
-                  placeholder={"Post Blog"}
-                  icon={<MdAdd className="text-text" size={18} />}
-                  className={"border border-default-border"}
-                />
+  useEffect(() => {
+    fetchBlogs()
+  }, [])
+
+  console.log("editing blog:", editingBlog)
+
+  const handleSubmit = async (data) => {
+    if (editingBlog) {
+      await updateBlog(editingBlog.id, data)
+      setEditingBlog(null)
+    } else {
+      await createBlog(data)
+    }
+  }
+
+  return (
+    <div className="space-y-2">
+      <div className="flex justify-between items-center">
+        <PageHeader text="Trending Blog" />
+        <BlogForm
+          initialData={editingBlog}
+          onSubmit={handleSubmit}
+          onClose={() => setEditingBlog(null)}
+        />
+
+      </div>
+
+      {blogs.map((blog) => (
+        <BlogCard
+          key={blog.id}
+          id={blog.id}
+          title={blog.title}
+          description={blog.content}
+          onEdit={() => setEditingBlog(blog)}
+          onDelete={() => deleteBlog(blog.id)}
+        />
+      ))}
     </div>
-     {Array.from({ length: 4 }).map((index) => (
-              <BlogCard />
-            ))}
-            </div>
   )
 }
 

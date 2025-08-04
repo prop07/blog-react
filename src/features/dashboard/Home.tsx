@@ -1,11 +1,12 @@
 import useLoading from "@/shared/hooks/useLoading";
 import { Link } from "react-router";
 import toast from "react-hot-toast";
-import BlogCard from "../blog/components/BlogCard";
 import BlogList from "../blog/components/BlogList";
+import { useBlog } from "../blog/hooks/useBlog";
 
 const Home = () => {
   const { isLoading, setLoading } = useLoading();
+  const {blogs, status} = useBlog();
 
   const startProcess = () => {
     setLoading(true);
@@ -22,6 +23,7 @@ const Home = () => {
   return (
     <div className="mt-20 p-2">
       Home
+      <p>{status == "pending" ? <span>loadinng</span>:<span>{JSON.stringify(blogs,null,2)}</span>}</p>
       <div>
         {isLoading ? <p>Loading...</p> : <p>Content loaded</p>}
         <button onClick={startProcess} className="mt-2 bg-black text-white px-4 py-2 rounded">

@@ -8,7 +8,11 @@ app.use(cors());
 app.use(express.json());
 
 const users = [];
-const blogs = [];
+const blogs = Array.from({ length: 10 }, (_, i) => ({
+  id: String(i + 1),
+  title: `Blog Title ${i + 1}`,
+  description: `This is the description for blog ${i + 1}.`
+}));
 const JWT_SECRET = "secret123";
 
 // Log every request

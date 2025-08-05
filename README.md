@@ -27,14 +27,18 @@
 
 ```bash
 npm install
+```
 
 # Run the Frontend dev
 
+```bash
 npm run dev
+```
 
 # Run the Backend Server
 
+```bash
 npm run server
 ```
 
-## Happy coding! 😊
+### Happy coding! 😊

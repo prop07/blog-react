@@ -12,7 +12,11 @@ type Blog = {
 };
 
 export const useBlog = () => {
-  const { blogs, status, setBlogs, setBlogStatus } = useBlogStore();
+  const blogs = useBlogStore((state) => state.blogs);
+  const status = useBlogStore((state) => state.status);
+  const setBlogs = useBlogStore((state) => state.setBlogs);
+  const setBlogStatus = useBlogStore((state) => state.setBlogStatus);
+
   const { fetchData } = useFetch();
   const { setLoading } = useLoading();
 

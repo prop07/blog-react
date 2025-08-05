@@ -10,7 +10,10 @@ const useAuth = () => {
   const { setLoading } = useLoading();
   const navigate = useNavigate();
   const { fetchData } = useFetch();
-  const { token, isAuthenticated, setToken, logout } = useAuthStore();
+  const token = useAuthStore((state) => state.token);
+  const setToken = useAuthStore((state) => state.setToken);
+  const logout = useAuthStore((state) => state.logout);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const loginUser = async (email: string, password: string) => {
     try {

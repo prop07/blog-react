@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import { useFetch } from "@/shared/hooks/useFetch";
-import { useAuthStore } from "@/features/auth/authStore";
 
 export const useInitialLoad = () => {
   const { fetchData } = useFetch();
   const [serverError, setServerError] = useState(false);
-  const { token } = useAuthStore();
-  console.log("token:", token);
 
   useEffect(() => {
     const checkServer = async () => {
@@ -16,7 +13,6 @@ export const useInitialLoad = () => {
         setServerError(true);
       }
     };
-
     checkServer();
   }, []);
 

@@ -1,4 +1,4 @@
-import  { createContext, useState, type ReactNode } from "react";
+import { createContext, useState, type ReactNode } from "react";
 
 type LoadingContextType = {
   isLoading: boolean;

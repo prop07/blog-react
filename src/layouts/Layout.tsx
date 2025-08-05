@@ -2,9 +2,12 @@ import TopLoadingBar from "@/shared/components/TopLoadingBar";
 import NavBar from "../shared/components/NavBar";
 import { Outlet } from "react-router";
 import { useInitialLoad } from "@/shared/hooks/useInitialLoad";
+import { useAuthStore } from "@/features/auth/authStore";
 
 const Layout = () => {
   const { serverError } = useInitialLoad();
+  const { isAuthenticated } = useAuthStore();
+  console.log("User:", isAuthenticated)
 
   if (serverError)
     return (

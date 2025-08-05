@@ -4,13 +4,13 @@ import { Outlet, useNavigate } from "react-router";
 
 const ProtectedLayout = () => {
     const navigate = useNavigate();
-    const { token } = useAuthStore();
+    const { isAuthenticated } = useAuthStore();
 
     useEffect(() => {
-        if (!token) navigate('/auth/login');
-    }, [token]);
+        if (!isAuthenticated) navigate('/auth/login');
+    }, [isAuthenticated]);
 
-    if (!token) return null;
+    if (!isAuthenticated) return null;
     return <Outlet />;
 };
 

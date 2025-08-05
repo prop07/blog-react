@@ -5,7 +5,7 @@ import { LoadingProvider } from "@/shared/context/LoadingProvider";
 function App() {
   return (
     <LoadingProvider>
-      <Toaster/>
+      <Toaster />
       <Router />
     </LoadingProvider>
   );

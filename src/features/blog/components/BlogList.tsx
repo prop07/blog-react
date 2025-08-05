@@ -40,6 +40,8 @@ const BlogList = () => {
       <div className='grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4'>
         {status === "pending" ? (
           [...Array(12)].map((_, i) => <LoadingAnimations key={i} />)
+        ) : blogs.length === 0 ? (
+          < div className="mt-4 text-gray-500">No blogs yet. Add one using the "Post Blog" button.</div>
         ) : (
           blogs.map((blog) => (
             <BlogCard

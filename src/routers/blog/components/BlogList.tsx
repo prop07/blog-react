@@ -1,8 +1,8 @@
-import PageHeader from '@/shared/components/ui/PageHeader'
+import PageHeader from '@/shared/ui/PageHeader'
 import BlogCard, { LoadingAnimations } from './BlogCard'
 import BlogForm from './BlogForm'
-import { useBlog } from '../hooks/useBlog'
 import { useEffect, useState } from 'react'
+import { useBlog } from '@/hooks/useBlog'
 
 type Blog = {
   id: string

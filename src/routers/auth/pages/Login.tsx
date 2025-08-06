@@ -1,14 +1,13 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import InputField from "@/shared/components/ui/Input/InputField";
-import PageHeader from "@/shared/components/ui/PageHeader";
-import Submit from "@/shared/components/ui/button/Submit";
+import InputField from "@/shared/ui/Input/InputField";
+import PageHeader from "@/shared/ui/PageHeader";
+import Submit from "@/shared/ui/button/Submit";
 import { Link } from "react-router";
-import useAuth from "../../../hooks/useAuth";
+import useAuth from "@/hooks/useAuth";
 
-const registerSchema = z.object({
-  name: z.string().min(1, "Name is required"),
+const loginSchema = z.object({
   email: z
     .string()
     .nonempty("Email is required")
@@ -16,34 +15,31 @@ const registerSchema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
-type RegisterFormInputs = z.infer<typeof registerSchema>;
+type LoginFormInputs = z.infer<typeof loginSchema>;
 
-function Register() {
-  const { registerUser } = useAuth();
+function Login() {
+  const { loginUser } = useAuth();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterFormInputs>({
-    resolver: zodResolver(registerSchema),
+  } = useForm<LoginFormInputs>({
+    resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = (data: RegisterFormInputs) => {
-    registerUser(data.name, data.email, data.password);
+  const onSubmit = (data: LoginFormInputs) => {
+    loginUser(data.email, data.password);
   };
 
   return (
     <div className="relative">
       <div className="mx-auto absolute inset-x-0 top-30 justify-center max-w-md mt-12">
-        <PageHeader text="Register" description="It's quick and easy." />
+        <PageHeader
+          text="Login"
+          description="If you are already a member, easily log in."
+        />
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <InputField
-            placeholder="Name"
-            type="text"
-            error={errors.name?.message}
-            {...register("name")}
-          />
           <InputField
             placeholder="Email"
             type="email"
@@ -56,11 +52,11 @@ function Register() {
             error={errors.password?.message}
             {...register("password")}
           />
-          <Submit placeholder="Register" />
+          <Submit placeholder="Login" />
         </form>
-        <Link to="/auth/login">
+        <Link to="/auth/register">
           <p className="text-sm underline text-end mt-2 tracking-wider">
-            login
+            register
           </p>
         </Link>
       </div>
@@ -68,4 +64,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Login;

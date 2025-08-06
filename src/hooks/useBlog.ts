@@ -1,6 +1,6 @@
-import { useBlogStore } from "../../../store/blog-slice";
 import { useFetch } from "@/shared/hooks/useFetch";
 import useLoading from "@/shared/hooks/useLoading";
+import { useBlogStore } from "@/store/blog-slice";
 import toast from "react-hot-toast";
 
 const API_URL = "http://localhost:5000/api/blog";

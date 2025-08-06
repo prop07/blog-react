@@ -1,6 +1,6 @@
 import Modal from '@/shared/components/models/Modal'
-import Button from '@/shared/components/ui/button/Button'
-import Submit from '@/shared/components/ui/button/Submit'
+import Button from '@/shared/ui/button/Button'
+import Submit from '@/shared/ui/button/Submit'
 import { useEffect, useState } from 'react'
 import { MdAdd, MdClose } from 'react-icons/md'
 import { useForm } from 'react-hook-form'

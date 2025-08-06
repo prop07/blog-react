@@ -1,5 +1,5 @@
 import { MdLogout } from "react-icons/md";
-import Button from "@/shared/components/ui/button/Button";
+import Button from "@/shared/ui/button/Button";
 import { useAuthenticated } from "@/store/auth-slice";
 import useAuth from "@/hooks/useAuth";
 

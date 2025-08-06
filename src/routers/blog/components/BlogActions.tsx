@@ -1,4 +1,4 @@
-import Button from "@/shared/components/ui/button/Button";
+import Button from "@/shared/ui/button/Button";
 import { useState, useEffect, useRef } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 

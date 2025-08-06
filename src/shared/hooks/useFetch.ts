@@ -1,7 +1,7 @@
-import { useAuthStore } from "@/store/auth-slice";
+import { useTokenStore } from "@/store/auth-slice";
 
 export const useFetch = () => {
-  const { token } = useAuthStore();
+  const token = useTokenStore((state) => state.token);
 
   const getAuthHeader = (url: string) => {
     const headers: Record<string, string> = {

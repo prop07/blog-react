@@ -54,7 +54,7 @@ const useAuth = () => {
     setToken(null);
     toast.success("Logged out");
     setLoading(false);
-    navigate("/auth/login");
+    navigate("/auth/login", { replace: true });
   };
 
   return {

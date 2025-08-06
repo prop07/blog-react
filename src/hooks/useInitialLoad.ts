@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useFetch } from "@/shared/hooks/useFetch";
+import { useFetch } from "@/hooks/useFetch";
 
 export const useInitialLoad = () => {
   const { fetchData } = useFetch();

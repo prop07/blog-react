@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { MdOutlineWbSunny } from "react-icons/md";
 import { RiMoonClearLine } from "react-icons/ri";
-import Button from "./ui/button/Button";
+import Button from "../ui/button/Button";
 
 const Theme = () => {
   const [theme, setTheme] = useState<"light" | "dark" | null>(null);

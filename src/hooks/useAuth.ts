@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { toast } from "react-hot-toast";
-import { useFetch } from "@/shared/hooks/useFetch";
-import useLoading from "@/shared/hooks/useLoading";
+import { useFetch } from "@/hooks/useFetch";
+import useLoading from "@/hooks/useLoading";
 import { useTokenStore } from "@/store/auth-slice";
 
 const API_BASE = "http://localhost:5000/api/user";

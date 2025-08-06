@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 import { FaGithub } from "react-icons/fa";
-import Theme from "../Theme";
 import Button from "../ui/button/Button";
-import LogoutButton from "@/layout/LogoutButton";
+import LogoutButton from "@/shared/components/LogoutButton";
+import Theme from "./Theme";
 
 const NavBar = () => {
   return (

@@ -1,7 +1,7 @@
 import TopLoadingBar from "@/shared/components/TopLoadingBar";
 import NavBar from "../shared/components/NavBar";
 import { Outlet } from "react-router";
-import { useInitialLoad } from "@/shared/hooks/useInitialLoad";
+import { useInitialLoad } from "@/hooks/useInitialLoad";
 import { useAuthenticated } from "@/store/auth-slice";
 
 const Layout = () => {

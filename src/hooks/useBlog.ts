@@ -1,5 +1,5 @@
-import { useFetch } from "@/shared/hooks/useFetch";
-import useLoading from "@/shared/hooks/useLoading";
+import { useFetch } from "@/hooks/useFetch";
+import useLoading from "@/hooks/useLoading";
 import { useBlogStore } from "@/store/blog-slice";
 import toast from "react-hot-toast";
 

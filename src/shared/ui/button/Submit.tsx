@@ -1,4 +1,4 @@
-import useLoading from "@/shared/hooks/useLoading";
+import useLoading from "@/hooks/useLoading";
 
 interface Props {
   placeholder?: string;

@@ -1,4 +1,4 @@
-import useLoading from "@/shared/hooks/useLoading";
+import useLoading from "@/hooks/useLoading";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 

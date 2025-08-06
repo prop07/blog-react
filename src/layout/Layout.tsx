@@ -2,12 +2,13 @@ import TopLoadingBar from "@/shared/components/TopLoadingBar";
 import NavBar from "../shared/components/NavBar";
 import { Outlet } from "react-router";
 import { useInitialLoad } from "@/shared/hooks/useInitialLoad";
-import { useAuthStore } from "@/features/auth/authStore";
+import { useAuthenticated } from "@/store/auth-slice";
 
 const Layout = () => {
   const { serverError } = useInitialLoad();
-  const { isAuthenticated } = useAuthStore();
-  console.log("User:", isAuthenticated)
+  const isAuthenticated = useAuthenticated();
+
+  console.log("User:", isAuthenticated);
 
   if (serverError)
     return (
@@ -17,8 +18,12 @@ const Layout = () => {
           <p className="text-sm text-gray-400">
             Make sure you run the server in a separate terminal using:
           </p>
-          <p className="bg-white  text-black font-semibold px-2 py-1 rounded">npm run server</p>
-          <p className="text-sm text-gray-400">Or read the README for setup instructions.</p>
+          <p className="bg-white  text-black font-semibold px-2 py-1 rounded">
+            npm run server
+          </p>
+          <p className="text-sm text-gray-400">
+            Or read the README for setup instructions.
+          </p>
         </div>
       </div>
     );

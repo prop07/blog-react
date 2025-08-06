@@ -1,4 +1,4 @@
-import { useBlogStore } from "../blogStore";
+import { useBlogStore } from "../../../store/blog-slice";
 import { useFetch } from "@/shared/hooks/useFetch";
 import useLoading from "@/shared/hooks/useLoading";
 import toast from "react-hot-toast";

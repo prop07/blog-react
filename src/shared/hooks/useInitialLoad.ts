@@ -14,7 +14,7 @@ export const useInitialLoad = () => {
       }
     };
     checkServer();
-  }, []);
+  }, [fetchData]);
 
   return { serverError };
 };

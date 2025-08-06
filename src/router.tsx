@@ -1,10 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
-import Layout from "./layouts/Layout";
+import Layout from "./layout/Layout";
 import Home from "./features/dashboard/Home";
 import Login from "./features/auth/pages/Login";
 import Register from "./features/auth/pages/Register";
-import AuthLayout from "./layouts/AuthLayout";
-import ProtectedLayout from "./layouts/ProtectedLayout";
+import AuthLayout from "./layout/AuthLayout";
+import ProtectedLayout from "./layout/ProtectedLayout";
 
 
 const routes = createBrowserRouter([

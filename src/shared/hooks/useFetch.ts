@@ -1,4 +1,4 @@
-import { useAuthStore } from "@/features/auth/authStore";
+import { useAuthStore } from "@/store/auth-slice";
 
 export const useFetch = () => {
   const { token } = useAuthStore();

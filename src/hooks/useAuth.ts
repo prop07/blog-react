@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router";
 import { toast } from "react-hot-toast";
-import { useAuthStore } from "../authStore";
 import { useFetch } from "@/shared/hooks/useFetch";
 import useLoading from "@/shared/hooks/useLoading";
+import { useTokenStore } from "@/store/auth-slice";
 
 const API_BASE = "http://localhost:5000/api/user";
 
@@ -10,10 +10,7 @@ const useAuth = () => {
   const { setLoading } = useLoading();
   const navigate = useNavigate();
   const { fetchData } = useFetch();
-  const token = useAuthStore((state) => state.token);
-  const setToken = useAuthStore((state) => state.setToken);
-  const logout = useAuthStore((state) => state.logout);
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const setToken = useTokenStore((state) => state.setToken);
 
   const loginUser = async (email: string, password: string) => {
     try {
@@ -54,15 +51,13 @@ const useAuth = () => {
 
   const logoutUser = () => {
     setLoading(true);
-    logout();
+    setToken(null);
     toast.success("Logged out");
     setLoading(false);
     navigate("/auth/login");
   };
 
   return {
-    token,
-    isAuthenticated,
     loginUser,
     registerUser,
     logoutUser,

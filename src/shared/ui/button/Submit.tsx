@@ -1,11 +1,11 @@
-import useLoading from "@/hooks/useLoading";
+import { useLoadingStore } from "@/store/loading-slice";
 
 interface Props {
   placeholder?: string;
 }
 
 const Submit = ({ placeholder = "Submit" }: Props) => {
-  const { isLoading } = useLoading();
+  const { isLoading } = useLoadingStore();
   return (
     <button
       disabled={isLoading}

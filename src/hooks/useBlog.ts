@@ -1,6 +1,7 @@
 import { useFetch } from "@/hooks/useFetch";
-import useLoading from "@/hooks/useLoading";
-import { useBlogStore } from "@/store/blog-slice";
+import { useBlogContext } from "@/shared/context/BlogContext";
+import { useLoadingStore } from "@/store/loading-slice";
+
 import toast from "react-hot-toast";
 
 const API_URL = "http://localhost:5000/api/blog";
@@ -12,13 +13,10 @@ type Blog = {
 };
 
 export const useBlog = () => {
-  const blogs = useBlogStore((state) => state.blogs);
-  const status = useBlogStore((state) => state.status);
-  const setBlogs = useBlogStore((state) => state.setBlogs);
-  const setBlogStatus = useBlogStore((state) => state.setBlogStatus);
+  const { blogs, status, setBlogs, setBlogStatus } = useBlogContext();
 
   const { fetchData } = useFetch();
-  const { setLoading } = useLoading();
+  const { setLoading } = useLoadingStore();
 
   const fetchBlogs = async () => {
     setBlogStatus("pending");
@@ -40,7 +38,7 @@ export const useBlog = () => {
       await fetchBlogs();
     } catch (error) {
       toast.error((error as Error).message || "Unable to Add Blog");
-      throw error; // rethrow
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -60,7 +58,7 @@ export const useBlog = () => {
       await fetchBlogs();
     } catch (error) {
       toast.error((error as Error).message || "Unable to Update Blog");
-      throw error; // rethrow
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -72,7 +70,7 @@ export const useBlog = () => {
       await fetchData(`${API_URL}/${id}`, {
         method: "DELETE",
       });
-      toast.success("Blog Deleted Sucessfully");
+      toast.success("Blog Deleted Successfully");
       await fetchBlogs();
     } catch (error) {
       toast.error((error as Error).message || "Unable to Delete Blog");

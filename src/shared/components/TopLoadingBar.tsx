@@ -1,9 +1,9 @@
-import useLoading from "@/hooks/useLoading";
+import { useLoadingStore } from "@/store/loading-slice";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 
 const TopLoadingBar = () => {
-  const { isLoading } = useLoading();
+  const { isLoading } = useLoadingStore();
   const location = useLocation();
   const [progress, setProgress] = useState(0);
   const [display, setDisplay] = useState(false);

@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router";
 import { toast } from "react-hot-toast";
 import { useFetch } from "@/hooks/useFetch";
-import useLoading from "@/hooks/useLoading";
 import { useTokenStore } from "@/store/auth-slice";
+import { useLoadingStore } from "@/store/loading-slice";
 
 const API_BASE = "http://localhost:5000/api/user";
 
 const useAuth = () => {
-  const { setLoading } = useLoading();
+  const { setLoading } = useLoadingStore();
   const navigate = useNavigate();
   const { fetchData } = useFetch();
   const setToken = useTokenStore((state) => state.setToken);

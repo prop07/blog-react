@@ -4,8 +4,6 @@ import { useLoadingStore } from "@/store/loading-slice";
 
 import toast from "react-hot-toast";
 
-const API_URL = "http://localhost:5000/api/blog";
-
 type Blog = {
   id: string;
   title: string;
@@ -21,7 +19,7 @@ export const useBlog = () => {
   const fetchBlogs = async () => {
     setBlogStatus("pending");
     try {
-      const data: Blog[] = await fetchData(API_URL);
+      const data: Blog[] = await fetchData(import.meta.env.VITE_API_URL);
       setBlogs(data);
     } catch (error) {
       console.error("Failed to fetch blogs:", error);
@@ -33,7 +31,10 @@ export const useBlog = () => {
   const createBlog = async (data: { title: string; description: string }) => {
     try {
       setLoading(true);
-      await fetchData(API_URL, { method: "POST", body: JSON.stringify(data) });
+      await fetchData(import.meta.env.VITE_API_URL, {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
       toast.success("Blog Added Successfully");
       await fetchBlogs();
     } catch (error) {
@@ -50,7 +51,7 @@ export const useBlog = () => {
   ) => {
     try {
       setLoading(true);
-      await fetchData(`${API_URL}/${id}`, {
+      await fetchData(`${import.meta.env.VITE_API_URL}/${id}`, {
         method: "PUT",
         body: JSON.stringify(data),
       });
@@ -67,7 +68,7 @@ export const useBlog = () => {
   const deleteBlog = async (id: string) => {
     try {
       setLoading(true);
-      await fetchData(`${API_URL}/${id}`, {
+      await fetchData(`${import.meta.env.VITE_API_URL}/${id}`, {
         method: "DELETE",
       });
       toast.success("Blog Deleted Successfully");

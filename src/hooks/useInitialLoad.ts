@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
-import { useFetch } from "@/hooks/useFetch";
+import axiosInstance from "@/lib/axios"; // path to your axios instance
 
 export const useInitialLoad = () => {
-  const { fetchData } = useFetch();
   const [serverError, setServerError] = useState(false);
 
   useEffect(() => {
     const checkServer = async () => {
       try {
-        await fetchData<{ message: string }>("http://localhost:5000/");
+        await axiosInstance.get<{ message: string }>("/");
       } catch {
         setServerError(true);
       }
     };
     checkServer();
-  }, [fetchData]);
+  }, []);
 
   return { serverError };
 };

@@ -1,29 +1,30 @@
 import { useNavigate } from "react-router";
 import { toast } from "react-hot-toast";
-import { useFetch } from "@/hooks/useFetch";
 import { useTokenStore } from "@/store/auth-slice";
 import { useLoadingStore } from "@/store/loading-slice";
+import axiosInstance from "@/lib/axios"; // path to your axios instance
 
-const API_BASE = "http://localhost:5000/api/user";
+const API_BASE = "/user"; // Axios instance already has baseURL
 
 const useAuth = () => {
   const { setLoading } = useLoadingStore();
   const navigate = useNavigate();
-  const { fetchData } = useFetch();
   const setToken = useTokenStore((state) => state.setToken);
 
   const loginUser = async (email: string, password: string) => {
     try {
       setLoading(true);
-      const data = await fetchData<{ token: string }>(`${API_BASE}/login`, {
-        method: "POST",
-        body: JSON.stringify({ email, password }),
-      });
+      const { data } = await axiosInstance.post<{ token: string }>(
+        `${API_BASE}/login`,
+        { email, password }
+      );
       setToken(data.token);
       toast.success("Login successful");
       navigate("/");
-    } catch (error) {
-      toast.error((error as Error).message || "Login failed");
+    } catch (error: any) {
+      toast.error(
+        error.response?.data?.error || error.message || "Login failed"
+      );
     } finally {
       setLoading(false);
     }
@@ -36,14 +37,17 @@ const useAuth = () => {
   ) => {
     try {
       setLoading(true);
-      await fetchData(`${API_BASE}/register`, {
-        method: "POST",
-        body: JSON.stringify({ username, email, password }),
+      await axiosInstance.post(`${API_BASE}/register`, {
+        username,
+        email,
+        password,
       });
       toast.success("Registration successful");
       navigate("/auth/login");
-    } catch (error) {
-      toast.error((error as Error).message || "Registration failed");
+    } catch (error: any) {
+      toast.error(
+        error.response?.data?.error || error.message || "Registration failed"
+      );
     } finally {
       setLoading(false);
     }

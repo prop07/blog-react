@@ -1,7 +1,6 @@
-import { useFetch } from "@/hooks/useFetch";
+import axiosInstance from "@/lib/axios"; // path to your axios instance
 import { useBlogContext } from "@/shared/context/BlogContext";
 import { useLoadingStore } from "@/store/loading-slice";
-
 import toast from "react-hot-toast";
 
 type Blog = {
@@ -12,14 +11,12 @@ type Blog = {
 
 export const useBlog = () => {
   const { blogs, status, setBlogs, setBlogStatus } = useBlogContext();
-
-  const { fetchData } = useFetch();
   const { setLoading } = useLoadingStore();
 
   const fetchBlogs = async () => {
     setBlogStatus("pending");
     try {
-      const data: Blog[] = await fetchData(import.meta.env.VITE_API_URL);
+      const { data } = await axiosInstance.get<Blog[]>("/blogs");
       setBlogs(data);
     } catch (error) {
       console.error("Failed to fetch blogs:", error);
@@ -31,10 +28,7 @@ export const useBlog = () => {
   const createBlog = async (data: { title: string; description: string }) => {
     try {
       setLoading(true);
-      await fetchData(import.meta.env.VITE_API_URL, {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
+      await axiosInstance.post("/blog", data);
       toast.success("Blog Added Successfully");
       await fetchBlogs();
     } catch (error) {
@@ -51,10 +45,7 @@ export const useBlog = () => {
   ) => {
     try {
       setLoading(true);
-      await fetchData(`${import.meta.env.VITE_API_URL}/${id}`, {
-        method: "PUT",
-        body: JSON.stringify(data),
-      });
+      await axiosInstance.put(`/blog/${id}`, data);
       toast.success("Blog Updated Successfully");
       await fetchBlogs();
     } catch (error) {
@@ -68,9 +59,7 @@ export const useBlog = () => {
   const deleteBlog = async (id: string) => {
     try {
       setLoading(true);
-      await fetchData(`${import.meta.env.VITE_API_URL}/${id}`, {
-        method: "DELETE",
-      });
+      await axiosInstance.delete(`/blog/${id}`);
       toast.success("Blog Deleted Successfully");
       await fetchBlogs();
     } catch (error) {

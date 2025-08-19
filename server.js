@@ -62,7 +62,7 @@ app.use((req, res, next) => {
 });
 
 // Debug route
-app.get("/", (req, res) => {
+app.get("/api/", (req, res) => {
   res.send({
     message: "Debug info",
     users,
@@ -96,7 +96,7 @@ app.post("/api/blog", (req, res) => {
 });
 
 // Read all blogs
-app.get("/api/blog", (req, res) => {
+app.get("/api/blogs", (req, res) => {
   res.send(blogs);
 });
 
@@ -118,7 +118,7 @@ app.delete("/api/blog/:id", (req, res) => {
 
 app.listen(5000, () => {
   console.log("====================================");
-  console.log("🚀 Server running. Debug at: http://localhost:5000");
+  console.log("🚀 Server running. Debug at: http://localhost:5000/api/");
   console.log("⏳ 1 second delay by default for every request");
   console.log("====================================");
 });
